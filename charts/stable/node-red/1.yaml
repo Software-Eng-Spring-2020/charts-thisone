@@ -1,0 +1,19 @@
+stages:
+  - dima
+  - naef
+  - mark
+
+variables:
+  NAMESPACE: "ate-production"
+  GIT_STRATEGY: clone
+
+dima:
+  stage: dima
+  script:
+    - helm upgrade my-release my-chart -f ./1.yaml --namespace ${NAMESPACE}
+  only:
+    - master
+  when: manual
+  tags:
+    - k8s
+
